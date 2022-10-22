@@ -1,8 +1,10 @@
 package io.eronalves1996;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -14,9 +16,12 @@ public class ChatExecutor {
 		Socket s = ss.accept();
 		System.out.println("Connected with: " + s.getRemoteSocketAddress());
 		BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
 		while(true) {
 			if(br.ready()) {
-				System.out.println(br.readLine());
+				bw.write(br.readLine());
+				bw.newLine();
+				bw.flush();
 			}
 		}
 	}
