@@ -12,9 +12,12 @@ public class ChatExecutor {
 		ServerSocket ss = new ServerSocket(5000);
 		System.out.println("Waiting a connection");
 		Socket s = ss.accept();
+		System.out.println("Connected with: " + s.getRemoteSocketAddress());
 		BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 		while(true) {
-			System.out.println(br.readLine());
+			if(br.ready()) {
+				System.out.println(br.readLine());
+			}
 		}
 	}
 
