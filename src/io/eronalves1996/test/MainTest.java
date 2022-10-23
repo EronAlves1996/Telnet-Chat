@@ -24,14 +24,8 @@ public class MainTest {
 	Socket[] sockets = new Socket[2];
 
 	@Test
-	public void testMainExecution() throws IOException, InterruptedException, ExecutionException {
-		ExecutorService executor = Executors.newSingleThreadExecutor();
-		executor.submit(()->{
-			try {
-				Main.main(null);
-			} catch (IOException e) {
-			}
-		});
+	public void testFirstMessage() throws IOException, InterruptedException, ExecutionException {
+		execute();
 		InetAddress host = InetAddress.getLocalHost();
 		sockets[0] = new Socket(host.getHostAddress(), 5000);
 		BufferedReader br1 = new BufferedReader(new InputStreamReader(sockets[0].getInputStream()));
@@ -41,5 +35,15 @@ public class MainTest {
 	@After
 	public void tearDown() throws IOException {
 		sockets[0].close();
+	}
+	
+	private void execute() {
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+		executor.submit(()->{
+			try {
+				Main.main(null);
+			} catch (IOException e) {
+			}
+		});
 	}
 }
