@@ -50,6 +50,14 @@ public class Main {
 				bw1.flush();
 			}
 		}
+		s1.close();
+		bw1.close();
+		br1.close();
+		s2.close();
+		bw2.close();
+		br2.close();
+		ss.close();
+		System.out.println("Ending program");
 	}
 
 }
