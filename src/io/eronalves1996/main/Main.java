@@ -31,7 +31,16 @@ public class Main {
 		bw2.newLine();
 		bw1.flush();
 		bw2.flush();
-		while(true) {
+		boolean shouldContinue = true;
+		while(shouldContinue) {
+			try {
+				bw1.write("\0");
+				bw1.flush();
+				bw2.write("\0");
+				bw2.flush();
+			} catch (Exception ex) {
+				shouldContinue = false;
+			}
 			if(br1.ready()) {
 				bw2.write("USER 1: " + br1.readLine() + "\n");
 				bw2.flush();
